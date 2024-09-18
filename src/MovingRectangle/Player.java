@@ -6,21 +6,33 @@ import java.awt.*;
 
 public class Player {
 
+    private Controller controller;
     private int x;
     private int y;
     private int speed;
 
-    public Player(){
+    public Player(Controller controller){
         x = 200;
         y = 200;
         speed = 3;
+        this.controller = controller;
     }
 
     public void update(){
-        x += speed;
+        if (controller.isDownPressed()){
+            y += speed;
+        } else if (controller.isUpPressed()) {
+            y -= speed;
+        } else if (controller.isLeftPressed()) {
+            x -= speed;
+        } else if (controller.isRightPressed()) {
+            x += speed;
+        }
     }
 
     public void draw(Canvas canvas){
+        canvas.drawRectangle(x - 10, y + 10, 40, 20, Color.RED);
+        canvas.drawRectangle(x - 10, y + 40, 40, 20, Color.RED);
         canvas.drawRectangle(x, y, 20, 60, Color.WHITE);
     }
 }

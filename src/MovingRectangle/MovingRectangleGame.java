@@ -9,10 +9,12 @@ public class MovingRectangleGame extends Game {
 
     private Player player;
     private Npc npc;
-
+    private Controller controller;
     @Override
     protected void initialize() {
-        player = new Player();
+        controller = new Controller();
+        super.addKeyListener(controller);
+        player = new Player(controller);
         npc = new Npc();
     }
 
