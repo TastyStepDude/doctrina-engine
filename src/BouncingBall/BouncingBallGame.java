@@ -1,6 +1,13 @@
+package BouncingBall;
+
+import BouncingBall.Ball;
+import Doctrina.Canvas;
+import Doctrina.Game;
+import Doctrina.GameTime;
+
 import java.awt.*;
 
-public final class BouncingBallGame extends Game{
+public final class BouncingBallGame extends Game {
     private int score;
     private Ball ball;
 
