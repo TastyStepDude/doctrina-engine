@@ -1,4 +1,5 @@
 public abstract class Game {
+
     private boolean playing = true;
     private GameTime gameTime;
     private RenderingEngine renderingEngine;
@@ -23,7 +24,8 @@ public abstract class Game {
             update();
             draw(renderingEngine.buildCanvas());
             renderingEngine.drawBufferOnScreen();
-            gameTime.sleep();
+            gameTime.synchronize();
         }
     }
+
 }
