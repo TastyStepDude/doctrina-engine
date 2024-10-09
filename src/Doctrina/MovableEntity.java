@@ -1,5 +1,7 @@
 package Doctrina;
 
+import java.awt.*;
+
 public abstract class MovableEntity extends StaticEntity{
     private int speed = 1;
     private Direction direction = Direction.UP;
@@ -29,6 +31,38 @@ public abstract class MovableEntity extends StaticEntity{
 
     public void moveRight(){
         move(Direction.RIGHT);
+    }
+
+    public Rectangle getHitBox(){
+        if (direction == Direction.UP){
+            return getUpperHitBox();
+        }
+        if (direction == Direction.DOWN){
+            return getLowerHitBox();
+        }
+        if (direction == Direction.LEFT){
+            return getLeftHitBox();
+        }
+        if (direction == Direction.RIGHT){
+            return getRightHitBox();
+        }
+        return getBounds();
+    }
+
+    private Rectangle getRightHitBox() {
+        return new Rectangle(x + width, y, speed, height);
+    }
+
+    private Rectangle getLeftHitBox() {
+        return new Rectangle(x - speed, y, speed, height);
+    }
+
+    private Rectangle getLowerHitBox() {
+        return new Rectangle(x, y + height, width, speed);
+    }
+
+    private Rectangle getUpperHitBox() {
+        return new Rectangle(x, y - speed, width, speed);
     }
 
     public int getSpeed() {
