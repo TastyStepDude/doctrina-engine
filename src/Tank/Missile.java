@@ -11,13 +11,45 @@ public class Missile extends MovableEntity {
     public Missile(Tank tank) {
         //setDirection(tank.getDirection());
         tankDirection = tank.getDirection();
-        setDimension(10, 10);
-        teleport(tank.getX(), tank.getY());
-        setSpeed(5);
+        initialize(tank);
     }
+
+    private void initialize(Tank tank) {
+        setSpeed(5);
+        if (tankDirection == Direction.RIGHT){
+            setDimension(8, 4);
+            teleport(tank.getX() + tank.getWidth(), tank.getY() + tank.getWidth() / 2 - height / 2);
+        }
+        if (tankDirection == Direction.LEFT){
+            setDimension(8, 4);
+            teleport(tank.getX(), tank.getY() + tank.getWidth() / 2 - height / 2);
+        }
+        if (tankDirection == Direction.UP){
+            setDimension(4, 8);
+            teleport(tank.getX() + tank.getWidth() / 2 - width / 2, tank.getY());
+        }
+        if (tankDirection == Direction.DOWN){
+            setDimension(4, 8);
+            teleport(tank.getX() + tank.getWidth() / 2 - width / 2, tank.getY() + tank.getHeight());
+        }
+
+    }
+
     @Override
     public void update() {
         move(tankDirection);
+        if (x >= 820) {
+            x = -20;
+        }
+        if (y >= 620) {
+            y = -20;
+        }
+        if (x < -20){
+            x = 820;
+        }
+        if (y < -20) {
+            y = 620;
+        }
     }
 
     @Override

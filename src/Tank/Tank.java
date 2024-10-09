@@ -7,6 +7,7 @@ import Doctrina.MovementController;
 import java.awt.*;
 
 public class Tank extends ControllableEntity {
+    private final int MAX_COOLDOWN = 40;
     private int cooldown = 0;
     public Tank(MovementController controller){
         super(controller);
@@ -16,7 +17,7 @@ public class Tank extends ControllableEntity {
     }
 
     public Missile fire() {
-        cooldown = 40;
+        cooldown = MAX_COOLDOWN;
         return new Missile(this);
     }
 
@@ -36,5 +37,10 @@ public class Tank extends ControllableEntity {
     @Override
     public void draw(Canvas canvas) {
         canvas.drawRectangle(this, Color.GREEN);
+        int cooldownWidth = cooldown * width / MAX_COOLDOWN;
+        if (cooldownWidth != 0) {
+            canvas.drawRectangle(x, y - 5, cooldownWidth, 2, Color.red);
+        }
+
     }
 }
