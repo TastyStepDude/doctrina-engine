@@ -1,6 +1,7 @@
 package Tank;
 
 import Doctrina.Canvas;
+import Doctrina.CollidableRepository;
 import Doctrina.ControllableEntity;
 import Doctrina.MovementController;
 
@@ -27,6 +28,7 @@ public class Tank extends ControllableEntity {
 
     @Override
     public void update() {
+        super.update();
         moveWithController();
         cooldown--;
         if (cooldown < 0) {
@@ -41,6 +43,8 @@ public class Tank extends ControllableEntity {
         if (cooldownWidth != 0) {
             canvas.drawRectangle(x, y - 5, cooldownWidth, 2, Color.red);
         }
-
+        if (hasMoved()){
+            drawHitBox(canvas);
+        }
     }
 }

@@ -21,7 +21,7 @@ public abstract class StaticEntity {
         this.height = height;
     }
 
-    public boolean intersectWidth(StaticEntity entity){
+    public boolean intersectWith(StaticEntity entity){
         return getBounds().intersects(entity.getBounds());
     }
 

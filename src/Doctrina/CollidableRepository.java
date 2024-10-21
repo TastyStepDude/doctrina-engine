@@ -17,25 +17,25 @@ public class CollidableRepository implements Iterable<StaticEntity> {
 
     public static CollidableRepository getInstance() {
         if (instance == null) {
-            return new CollidableRepository();
+            instance = new CollidableRepository();
         }
         return instance;
     }
 
-    public void registerStaticEntity(StaticEntity entity) {
+    public void registerEntity(StaticEntity entity) {
         registeredEntities.add(entity);
     }
 
-    public void unregisterStaticEntity(StaticEntity entity) {
+    public void unregisterEntity(StaticEntity entity) {
         registeredEntities.remove(entity);
     }
 
-    public void registerStaticEntities(Collection<StaticEntity> entities) {
+    public void registerEntities(Collection<StaticEntity> entities) {
         registeredEntities.addAll(entities);
     }
 
-    public void unregisterStaticEntities(Collection<StaticEntity> entities) {
-        registeredEntities.addAll(entities);
+    public void unregisterEntities(Collection<StaticEntity> entities) {
+        registeredEntities.removeAll(entities);
     }
 
     public int count() {

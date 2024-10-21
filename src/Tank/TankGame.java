@@ -1,7 +1,9 @@
 package Tank;
 
 import Doctrina.Canvas;
+import Doctrina.CollidableRepository;
 import Doctrina.Game;
+import Doctrina.StaticEntity;
 
 import java.util.ArrayList;
 
@@ -10,6 +12,7 @@ public class TankGame extends Game {
     private Tank tank;
     private ArrayList<Missile> missiles;
     private ArrayList<Brick> bricks;
+
     @Override
     protected void initialize() {
         gamePad = new GamePad();
@@ -33,9 +36,27 @@ public class TankGame extends Game {
             missiles.add(tank.fire());
         }
         tank.update();
+
+        ArrayList<StaticEntity> killedEntities = new ArrayList<>(); //TODO: clear every update instead
         for (Missile missile: missiles){
             missile.update();
+            for (Brick brick : bricks){ //TODO: isoler dans les différentes class
+                if (missile.hitBoxIntersectWith(brick)){
+                    killedEntities.add(missile);
+                    killedEntities.add(brick);
+                }
+            }
         }
+
+        for (StaticEntity killedEntity : killedEntities) {//TODO: replace with better code, maybe an interface could be nice
+            if (killedEntity instanceof Brick) {
+                bricks.remove(killedEntity);
+            }
+            if (killedEntity instanceof Missile) {
+                missiles.remove(killedEntity);
+            }
+        }
+        CollidableRepository.getInstance().unregisterEntities(killedEntities);
     }
 
     @Override
