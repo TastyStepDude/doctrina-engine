@@ -4,6 +4,7 @@ import Doctrina.Canvas;
 import Doctrina.CollidableRepository;
 import Doctrina.Game;
 import Doctrina.StaticEntity;
+import Viking.World;
 
 import java.util.ArrayList;
 
@@ -12,6 +13,7 @@ public class TankGame extends Game {
     private Tank tank;
     private ArrayList<Missile> missiles;
     private ArrayList<Brick> bricks;
+    private World world;
 
     @Override
     protected void initialize() {
@@ -25,6 +27,8 @@ public class TankGame extends Game {
         bricks.add(new Brick(200, 100));
         bricks.add(new Brick(100, 100));
         bricks.add(new Brick(450, 200));
+        world = new World();
+        world.load();
     }
 
     @Override
@@ -61,6 +65,7 @@ public class TankGame extends Game {
 
     @Override
     protected void draw(Canvas canvas) {
+        world.draw(canvas);
         tank.draw(canvas);
         for (Missile missile: missiles){
             missile.draw(canvas);
