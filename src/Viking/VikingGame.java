@@ -23,20 +23,9 @@ public class VikingGame extends Game {
         world = new World();
         world.load();
         tree = new Tree();
-        startMusic();//TODO: put in object
+        SoundEffect.MUSIC.play();
 
         RenderingEngine.getInstance().getScreen().fullscreen();
-    }
-
-    private void startMusic() { //TODO: maybe add mixer
-        try {
-            Clip clip = AudioSystem.getClip();
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getClassLoader().getResourceAsStream("audios/music.wav"));
-            clip.open(audioInputStream);
-            clip.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -55,14 +44,7 @@ public class VikingGame extends Game {
             soundCooldown = 100;
 
             //FIRE
-            try { //TODO: refactor, put in singleton, AudioSystem
-                Clip clip = AudioSystem.getClip();
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getClassLoader().getResourceAsStream("audios/fire.wav"));
-                clip.open(audioInputStream);
-                clip.start();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            SoundEffect.MURLOC.play();
         }
     }
 
